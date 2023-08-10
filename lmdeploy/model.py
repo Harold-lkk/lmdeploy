@@ -113,7 +113,7 @@ class InternLMChat7B8K(InternLMChat7B):
         self.session_len = 8192
 
 
-@MODELS.register_module(name='puyu')
+@MODELS.register_module(name='puyu-029')
 class Puyu(BaseModel):
     """Chat template of puyu model.This is only for internal usage in Shanghai
     AI Laboratory."""
@@ -152,7 +152,7 @@ class Puyu(BaseModel):
         return [45623]
 
 
-@MODELS.register_module(name='puyu-028')
+@MODELS.register_module(name='puyu')
 class PuyuV028(Puyu):
 
     def __init__(
