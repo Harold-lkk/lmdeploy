@@ -122,7 +122,7 @@ class Puyu(BaseModel):
             self,
             system='<|System|>: ',
             user='<|Human|>: ',
-            assistant='<|Assistant|>: ',
+            assistant='<|Assistant|>:',
             eoh='',
             eosys='',
             meta_instruction="""You are an AI assistant whose name is InternLM (书生·浦语).
