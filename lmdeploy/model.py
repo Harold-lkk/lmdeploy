@@ -113,6 +113,47 @@ class InternLMChat7B8K(InternLMChat7B):
         self.session_len = 8192
 
 
+@MODELS.register_module(name='puyu-0210')
+class PuyuV210(BaseModel):
+    """Chat template of puyu model.This is only for internal usage in Shanghai
+    AI Laboratory."""
+
+    def __init__(
+            self,
+            system='<|System|>െ',
+            user='<|Human|>െ',
+            assistant='<|Assistant|>',
+            eoh='\n ',
+            eosys='\n ',
+            eoa='\n ',
+            meta_instruction="""You are an AI assistant whose name is InternLM (书生·浦语).
+- 书生·浦语 is a conversational language model that is developed by Shanghai AI Laboratory (上海人工智能实验室). It is designed to be helpful, honest, and harmless.
+- 书生·浦语 can understand and communicate fluently in the language chosen by the user such as English and 中文.""",  # noqa: E501
+    ):
+
+        super().__init__()
+        self.system = system
+        self.meta_instruction = meta_instruction
+        self.user = user
+        self.eoh = eoh
+        self.eosys = eosys
+        self.assistant = assistant
+        self.eoa = eoa
+
+    def get_prompt(self, prompt, sequence_start=True):
+        if sequence_start:
+            return f'<BOS>{self.system}{self.meta_instruction}{self.eosys}' \
+                   f'{self.user}{prompt}{self.eoh}' \
+                   f'{self.assistant}'
+        else:
+            return f'{self.eoa}{self.user}{prompt}{self.eoh}{self.assistant}'
+
+    @property
+    def stop_words(self):
+        """Return the stop-words' token ids."""
+        return [45623]
+
+
 @MODELS.register_module(name='puyu-029')
 class Puyu(BaseModel):
     """Chat template of puyu model.This is only for internal usage in Shanghai
