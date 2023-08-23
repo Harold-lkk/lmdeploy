@@ -122,7 +122,7 @@ class PuyuV210(BaseModel):
             self,
             system='<|System|>െ',
             user='<|Human|>െ',
-            assistant='<|Assistant|>',
+            assistant='<|Assistant|>െ',
             eoh='\n ',
             eosys='\n ',
             eoa='\n ',
